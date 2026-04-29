@@ -13,12 +13,14 @@ Item {
         id: claudeProvider
         enabled: root.providerEnabled("claude")
         providerSettings: root.pluginSettings?.providers?.claude ?? ({})
+        includeCacheTokens: root.pluginSettings?.includeCacheTokens ?? true
     }
 
     Codex {
         id: codexProvider
         enabled: root.providerEnabled("codex")
         providerSettings: root.pluginSettings?.providers?.codex ?? ({})
+        includeCacheTokens: root.pluginSettings?.includeCacheTokens ?? true
     }
 
     OpenRouter {

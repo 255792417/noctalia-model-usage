@@ -33,6 +33,7 @@ Item {
     property string authHelpText: "Run `codex` to authenticate."
     property bool hasLocalStats: true
 
+    property bool includeCacheTokens: true
     property string configModel: ""
     property var providerSettings: ({})
 
@@ -279,7 +280,9 @@ Item {
                 const output = usage.output_tokens ?? 0;
                 const cached = usage.cached_input_tokens ?? 0;
                 const reasoning = usage.reasoning_output_tokens ?? 0;
-                root.todayTotalTokens = input + output + cached + reasoning;
+                root.todayTotalTokens = input + output + reasoning;
+                if (root.includeCacheTokens)
+                    root.todayTotalTokens += cached;
 
                 const modelName = root.configModel || "codex";
                 root.todayTokensByModel = {};

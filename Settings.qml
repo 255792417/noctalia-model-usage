@@ -206,6 +206,34 @@ ColumnLayout {
                 Layout.fillWidth: true
                 spacing: Style.marginXS
 
+                RowLayout {
+                    Layout.fillWidth: true
+                    spacing: Style.marginM
+                    NToggle {
+                        checked: editSettings?.includeCacheTokens ?? true
+                        onToggled: value => {
+                            editSettings.includeCacheTokens = value;
+                        }
+                    }
+                    NText {
+                        text: "Include cache tokens in token count"
+                        pointSize: Style.fontSizeM
+                        font.weight: Style.fontWeightSemiBold
+                        color: Color.mOnSurface
+                        Layout.fillWidth: true
+                    }
+                }
+                NText {
+                    text: "Count cache read and cache write tokens in totals"
+                    pointSize: Style.fontSizeXS
+                    color: Color.mOnSurfaceVariant
+                }
+            }
+
+            ColumnLayout {
+                Layout.fillWidth: true
+                spacing: Style.marginXS
+
                 NText {
                     text: "Refresh interval (seconds)"
                     pointSize: Style.fontSizeM
@@ -254,59 +282,30 @@ ColumnLayout {
                 color: Color.mPrimary
             }
 
-            ColumnLayout {
+            RowLayout {
                 Layout.fillWidth: true
-                spacing: Style.marginXS
-
-                RowLayout {
-                    Layout.fillWidth: true
-                    spacing: Style.marginM
-                    NToggle {
-                        checked: editSettings?.providers?.claude?.enabled ?? true
-                        onToggled: value => {
-                            if (!editSettings.providers)
-                                editSettings.providers = {};
-                            if (!editSettings.providers.claude)
-                                editSettings.providers.claude = {};
-                            editSettings.providers.claude.enabled = value;
-                            editSettingsChanged();
-                        }
-                    }
-                    NText {
-                        text: "Claude Code"
-                        pointSize: Style.fontSizeM
-                        color: Color.mOnSurface
-                        Layout.fillWidth: true
-                    }
-                    NText {
-                        text: "Local files"
-                        pointSize: Style.fontSizeXS
-                        color: Color.mOnSurfaceVariant
+                spacing: Style.marginM
+                NToggle {
+                    checked: editSettings?.providers?.claude?.enabled ?? true
+                    onToggled: value => {
+                        if (!editSettings.providers)
+                            editSettings.providers = {};
+                        if (!editSettings.providers.claude)
+                            editSettings.providers.claude = {};
+                        editSettings.providers.claude.enabled = value;
+                        editSettingsChanged();
                     }
                 }
-
-                RowLayout {
-                    visible: editSettings?.providers?.claude?.enabled ?? false
+                NText {
+                    text: "Claude Code"
+                    pointSize: Style.fontSizeM
+                    color: Color.mOnSurface
                     Layout.fillWidth: true
-                    Layout.leftMargin: Style.marginXL
-                    spacing: Style.marginM
-                    NToggle {
-                        checked: editSettings?.providers?.claude?.includeCacheTokens ?? true
-                        onToggled: value => {
-                            if (!editSettings.providers)
-                                editSettings.providers = {};
-                            if (!editSettings.providers.claude)
-                                editSettings.providers.claude = {};
-                            editSettings.providers.claude.includeCacheTokens = value;
-                            editSettingsChanged();
-                        }
-                    }
-                    NText {
-                        text: "Include cache tokens in count"
-                        pointSize: Style.fontSizeS
-                        color: Color.mOnSurface
-                        Layout.fillWidth: true
-                    }
+                }
+                NText {
+                    text: "Local files"
+                    pointSize: Style.fontSizeXS
+                    color: Color.mOnSurfaceVariant
                 }
             }
 

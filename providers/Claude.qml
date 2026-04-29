@@ -44,7 +44,7 @@ Item {
     property int probeMinIntervalMs: 5 * 60 * 1000
 
     property var providerSettings: ({})
-    property bool includeCacheTokens: providerSettings?.includeCacheTokens ?? true
+    property bool includeCacheTokens: true
 
     function resolvePath(p) {
         if (p && p.startsWith("~"))

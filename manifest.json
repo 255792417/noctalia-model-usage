@@ -27,8 +27,7 @@
         "claude": {
           "enabled": false,
           "statsPath": "~/.claude/stats-cache.json",
-          "credentialsPath": "~/.claude/.credentials.json",
-          "includeCacheTokens": true
+          "credentialsPath": "~/.claude/.credentials.json"
         },
         "codex": {
           "enabled": false
@@ -53,6 +52,7 @@
       "barFixedProviderId": "",
       "barCycleIntervalSec": 5,
       "barMetric": "prompts",
+      "includeCacheTokens": true,
       "refreshIntervalSec": 30
     }
   }
