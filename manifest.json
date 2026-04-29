@@ -27,7 +27,8 @@
         "claude": {
           "enabled": false,
           "statsPath": "~/.claude/stats-cache.json",
-          "credentialsPath": "~/.claude/.credentials.json"
+          "credentialsPath": "~/.claude/.credentials.json",
+          "includeCacheTokens": true
         },
         "codex": {
           "enabled": false

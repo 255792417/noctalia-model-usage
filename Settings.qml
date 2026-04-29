@@ -254,30 +254,59 @@ ColumnLayout {
                 color: Color.mPrimary
             }
 
-            RowLayout {
+            ColumnLayout {
                 Layout.fillWidth: true
-                spacing: Style.marginM
-                NToggle {
-                    checked: editSettings?.providers?.claude?.enabled ?? true
-                    onToggled: value => {
-                        if (!editSettings.providers)
-                            editSettings.providers = {};
-                        if (!editSettings.providers.claude)
-                            editSettings.providers.claude = {};
-                        editSettings.providers.claude.enabled = value;
-                        editSettingsChanged();
+                spacing: Style.marginXS
+
+                RowLayout {
+                    Layout.fillWidth: true
+                    spacing: Style.marginM
+                    NToggle {
+                        checked: editSettings?.providers?.claude?.enabled ?? true
+                        onToggled: value => {
+                            if (!editSettings.providers)
+                                editSettings.providers = {};
+                            if (!editSettings.providers.claude)
+                                editSettings.providers.claude = {};
+                            editSettings.providers.claude.enabled = value;
+                            editSettingsChanged();
+                        }
+                    }
+                    NText {
+                        text: "Claude Code"
+                        pointSize: Style.fontSizeM
+                        color: Color.mOnSurface
+                        Layout.fillWidth: true
+                    }
+                    NText {
+                        text: "Local files"
+                        pointSize: Style.fontSizeXS
+                        color: Color.mOnSurfaceVariant
                     }
                 }
-                NText {
-                    text: "Claude Code"
-                    pointSize: Style.fontSizeM
-                    color: Color.mOnSurface
+
+                RowLayout {
+                    visible: editSettings?.providers?.claude?.enabled ?? false
                     Layout.fillWidth: true
-                }
-                NText {
-                    text: "Local files"
-                    pointSize: Style.fontSizeXS
-                    color: Color.mOnSurfaceVariant
+                    Layout.leftMargin: Style.marginXL
+                    spacing: Style.marginM
+                    NToggle {
+                        checked: editSettings?.providers?.claude?.includeCacheTokens ?? true
+                        onToggled: value => {
+                            if (!editSettings.providers)
+                                editSettings.providers = {};
+                            if (!editSettings.providers.claude)
+                                editSettings.providers.claude = {};
+                            editSettings.providers.claude.includeCacheTokens = value;
+                            editSettingsChanged();
+                        }
+                    }
+                    NText {
+                        text: "Include cache tokens in count"
+                        pointSize: Style.fontSizeS
+                        color: Color.mOnSurface
+                        Layout.fillWidth: true
+                    }
                 }
             }
 

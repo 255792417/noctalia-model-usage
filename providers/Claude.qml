@@ -44,6 +44,7 @@ Item {
     property int probeMinIntervalMs: 5 * 60 * 1000
 
     property var providerSettings: ({})
+    property bool includeCacheTokens: providerSettings?.includeCacheTokens ?? true
 
     function resolvePath(p) {
         if (p && p.startsWith("~"))
@@ -119,7 +120,9 @@ Item {
 
                 for (const model in modelUsage) {
                     const m = modelUsage[model];
-                    const tokens = (m.inputTokens ?? 0) + (m.outputTokens ?? 0);
+                    let tokens = (m.inputTokens ?? 0) + (m.outputTokens ?? 0);
+                    if (root.includeCacheTokens)
+                        tokens += (m.cacheReadInputTokens ?? 0) + (m.cacheCreationInputTokens ?? 0);
 
                     todayTokens += tokens;
                     todayByModel[model] = (todayByModel[model] ?? 0) + tokens;
